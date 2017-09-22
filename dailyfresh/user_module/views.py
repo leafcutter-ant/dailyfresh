@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from .models import UserAccount
 from django.http import HttpResponse,JsonResponse
-import hashlib
+from django.core.mail import send_mail
+from django.conf import settings
+from . import tasks
 
 def register(res):
     return render(res,'user_module/register.html')
@@ -13,6 +15,11 @@ def register_handler(res):
     email = args.get('email')
 
     obj = UserAccount.objects.addUser(username,password,email)
+    # message = '<h1>欢迎你成为天天生鲜会员</h1>请牢记用户名和密码</br> username:'+username
+    # send_mail('天天生鲜网','',settings.EMAIL_FROM,[email],html_message=message)
+
+    # celery 发送邮件
+    tasks.sendmail.delay(username,email)
 
     # return HttpResponse('register ok name:'+obj.username)
     return render(res,'user_module/login.html')
@@ -33,19 +40,48 @@ def check_name(res):
         return JsonResponse({'res':0 })
 
 
+# 处理前端的ajax提交的 登录状态检查函数
+def check_login_status(res):
+    print('in check')
+    # name = res.GET.get('username')
+    # pwd = res.GET.get('password')
+    name = res.POST.get('username')
+    pwd = res.POST.get('password')
+    print(name)
+    print(pwd)
+    user = UserAccount.objects.findUserByName_pwd(name, pwd)
+    if user is not None:
+        return JsonResponse({'res':1})
+    else:
+        return JsonResponse({'res': 0})
+
+
 # 处理登录请求的函数
 def login_handler(res):
     args = res.POST
     username = args.get('username')
     password = args.get('pwd')
-
+    remberstatus = args.get('remberaccount')
+    print(remberstatus)
     user = UserAccount.objects.findUserByName_pwd(username,password)
-    if user is not None:
-        return render(res,'user_module/index.html')
-    else:
-        print(user)
-        return HttpResponse('not find user')
+    response = render(res,'user_module/index.html',{'username':username})
+    # 给session 赋值
+    res.session['loginstatus'] = 1
+    # 给cookie 赋值
+    if remberstatus == 'on':
+        addcookie(response,'username',username)
+    return response
 
+# 添加cookie
+def addcookie(response,key,val):
+    response.set_cookie(key,val,max_age=30*24*60*60)
 
+# 获取登录状态
+def login_status(res):
+    status = res.session.get('loginstatus',0)
+    return JsonResponse({'res':status})
 
-
+# 退出登录
+def quit_login(res):
+    res.session.clear()
+    return JsonResponse({'res':1})

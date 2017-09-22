@@ -18,16 +18,19 @@ html,body{height:100%}
 }
 
 .login_info{
-	display:none;
+	display:block;
 }
-
+.login_info a{
+	margin-left: 10px;
+	color:#666;
+}
 .login_info em{color:#ff8800}
 
 .login_btn a,.user_link a{
 	color:#666;
 }
 
-.login_btn a:hover,.user_link a:hover{
+.login_btn a:hover,.user_link a:hover,.login_info a:hover{
 	color:#ff8800;
 }
 

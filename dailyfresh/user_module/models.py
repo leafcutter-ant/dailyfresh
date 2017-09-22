@@ -14,7 +14,6 @@ class UserAccountManager(models.Manager):
         return obj
 
     def findUserByName(self,username):
-        print('find name')
         className = self.model
         objs = className.objects.filter(username=username)
         if objs is None or len(objs) == 0:
@@ -29,7 +28,8 @@ class UserAccountManager(models.Manager):
         if obj is None or len(obj) == 0:
             return None
         else:
-            return obj
+            # 查询结果是集合,应返回一个用户
+            return obj[0]
 
 
 class UserAccount(BaseModel):

@@ -50,22 +50,40 @@ $(function(){
 		{
 			$('#user_name').next().hide();
 			error_name = false;
-			check_name_exists_db();
+			check_name_exists_db(false);
 		}
 	}
 
-	function check_name_exists_db() {
+	function check_name_exists_db(async) {
 		name = $('#user_name').val();
-		$.get('/user/check_name/?username='+name,function (data) {
-			if(data.res == 1){
-				// 用户名可用
-				error_name = false;
-                $('#user_name').next().hide();
-			}else{
-				$('#user_name').next().html('用户名已存在,请重输入用户名').show();
-				error_name = true;
-			}
-        })
+        // $.get('/user/check_name/?username='+name,function (data) {
+			// if(data.res == 1){
+			// 	// 用户名可用
+			// 	error_name = false;
+        //         $('#user_name').next().hide();
+			// }else{
+			// 	$('#user_name').next().html('用户名已存在,请重输入用户名').show();
+			// 	error_name = true;
+			// }
+        // });
+		$.ajax({
+			'async': async,
+			'type': 'GET',
+			'url': '/user/check_name/?username='+name,
+			'success': function (data) {
+				if(data.res == 1){
+					// 用户名可用
+					error_name = false;
+					$('#user_name').next().hide();
+				}else{
+					$('#user_name').next().html('用户名已存在,请重输入用户名').show();
+					error_name = true;
+				}
+            },
+			'error': function () {
+				alert('request error');
+            }
+		})
     }
 
 	function check_pwd(){
@@ -125,6 +143,7 @@ $(function(){
 		check_pwd();
 		check_cpwd();
 		check_email();
+		alert(error_name);
 
 		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
 		{
