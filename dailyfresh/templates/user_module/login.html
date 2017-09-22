@@ -6,6 +6,8 @@
 	<title>天天生鲜-登录</title>
 	<link rel="stylesheet" type="text/css" href={% static "css/reset.css" %}>
 	<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
+    <script type="application/javascript" src={% static 'js/jquery-1.12.4.min.js' %}></script>
+    <script type="application/javascript" src={% static 'js/login.js' %}></script>
 </head>
 <body>
 	<div class="login_top clearfix">
@@ -22,17 +24,18 @@
 					<a href='/user/register'>立即注册</a>
 				</div>
 				<div class="form_input">
-					<form id="login_form" action="/user/login_handler/" method="post">
+					<form id="login_form" action="/user/index/" method="post">
                         {% csrf_token %}
 						<input type="text" name="username" class="name_input" placeholder="请输入用户名">
 						<div class="user_error">输入错误</div>
 						<input type="password" name="pwd" class="pass_input" placeholder="请输入密码">
-						<div class="pwd_error">输入错误</div>
+						<div class="pwd_errors">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox" name="">
+							<input type="checkbox" name="remberaccount">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>
+                        <div class="pwd_error">用户名或者密码错误</div>
 						<input type="submit" name="" value="登录" class="input_submit">
 					</form>
 				</div>

@@ -9,20 +9,22 @@
 	<script type="text/javascript" src={% static "js/jquery-1.12.4.min.js" %}></script>
 	<script type="text/javascript" src={% static "js/jquery-ui.min.js" %}></script>
 	<script type="text/javascript" src={% static "js/slide.js" %}></script>
+    <script type="text/javascript" src={% static 'js/functions.js' %}></script>
 </head>
 <body>
 	<div class="header_con">
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
 			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
-				</div>
-				<div class="login_btn fl">
-					<a href="login.html">登录</a>
-					<span>|</span>
-					<a href="register.html">注册</a>
-				</div>
+                <div class="login_info fl">
+                    欢迎您：<em>{{ username }}</em>
+                    <a href="#" id="quitlogin">退出登录</a>
+                </div>
+                <div class="login_btn fl">
+                    <a href="login.html">登录</a>
+                    <span>|</span>
+                    <a href="register.html">注册</a>
+                </div>
 				<div class="user_link fl">
 					<span>|</span>
 					<a href="user_center_info.html">用户中心</a>
@@ -332,9 +334,9 @@
 		<p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
-	<script type="text/javascript" src={% static "js/slideshow.js" %}></script>
+	<script type="text/javascript" src={% static "js/slide.js" %}></script>
 	<script type="text/javascript">
-		BCSlideshow('focuspic');
+{#		BCSlideshow('focuspic');#}
 		var oFruit = document.getElementById('fruit_more');
 		var oShownum = document.getElementById('show_count');
 

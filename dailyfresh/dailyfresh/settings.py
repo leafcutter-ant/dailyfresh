@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_module',
+    'djcelery',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,3 +107,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
+
+# 邮箱配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+#发送邮件的邮箱
+EMAIL_HOST_USER = '15655090667@163.com'
+#在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = 'chuzhou1125'
+#收件人看到的发件人
+EMAIL_FROM = '天天生鲜网<15655090667@163.com>'
+
+# django-celery 配置
+import djcelery
+djcelery.setup_loader() # 监听tasks.py
+BROKER_URL = 'redis://127.0.0.1:6379/2'
