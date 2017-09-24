@@ -2,6 +2,7 @@ $(function () {
     $('#login_form').submit(function () {
         var $name = $('.name_input');
         var $pwd = $('.pass_input');
+        var $rember = $('#remberaccount');
         var status = null;
         $name.focus(function () {
             $('.pwd_error').hide();
@@ -29,8 +30,8 @@ $(function () {
         });*/
         var key = "csrfmiddlewaretoken";
         var csrf = $('input[name = "csrfmiddlewaretoken"]').val();
-        alert(csrf);
-        param = {'username': $name.val(),'password': $pwd.val(),"csrfmiddlewaretoken":csrf};
+        param = {'username': $name.val(),'password': $pwd.val(),
+            'rember': $rember.is(':checked'),"csrfmiddlewaretoken":csrf};
        /* $.post('/user/checkloginstatus/',param,function (data) {
             // 无法指定同步（等待执行）
             if(data.res == 1){
@@ -64,4 +65,4 @@ $(function () {
     })
 
 
-})
+});

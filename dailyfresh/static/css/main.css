@@ -17,14 +17,13 @@ html,body{height:100%}
 	line-height:29px;
 }
 
-.login_info{
+.login_btn{
 	display:block;
 }
 .login_info a{
-	margin-left: 10px;
 	color:#666;
 }
-.login_info em{color:#ff8800}
+.login_info em{color:#ff8800;margin-left: 5px;}
 
 .login_btn a,.user_link a{
 	color:#666;
@@ -34,7 +33,7 @@ html,body{height:100%}
 	color:#ff8800;
 }
 
-.login_btn span,.user_link span{
+.login_info span,.login_btn span,.user_link span{
 	color:#cecece;
 	margin:0 10px;
 }
@@ -215,7 +214,7 @@ html,body{height:100%}
 .goods_type_list li h4{width:160px;margin:0 auto;}
 .goods_type_list li h4 a{font-weight:normal;color:#666;display:block;width:160px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
 .operate{width:160px;margin:10px auto;position:relative;}
-.goods_type_list .operate .prize{color:#da260e; font-size:14px;} 
+.goods_type_list .operate .prize{color:#da260e; font-size:14px;}
 .goods_type_list .operate .unit{color:#999;padding-left:5px;}
 .goods_type_list .operate .add_goods{display:inline-block;width:15px;height:15px;background:url(../images/shop_cart.png);position:absolute;right:0;top:3px;}
 
@@ -462,7 +461,7 @@ html,body{height:100%}
 }
 
 .order_list_table td{
-	border:1px solid #ddd;	
+	border:1px solid #ddd;
 	text-align:center;
 }
 
@@ -562,6 +561,19 @@ html,body{height:100%}
 
 .info_con{
 	width:980px;
+}
+.user_info_top{
+	width: 980px;
+	height: 20px;
+	margin-bottom: 10px;
+}
+.user_info_top h3{
+	float: left;
+	font-size: 16px;
+}
+.user_info_top select{
+	width: 150px;
+	float:right;
 }
 
 .info_l{

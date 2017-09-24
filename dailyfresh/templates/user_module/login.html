@@ -24,14 +24,14 @@
 					<a href='/user/register'>立即注册</a>
 				</div>
 				<div class="form_input">
-					<form id="login_form" action="/user/index/" method="post">
+					<form id="login_form" action="/user/login_handler/" method="post">
                         {% csrf_token %}
-						<input type="text" name="username" class="name_input" placeholder="请输入用户名">
+						<input type="text" name="username" class="name_input" placeholder="请输入用户名" value={{ default_name }}>
 						<div class="user_error">输入错误</div>
 						<input type="password" name="pwd" class="pass_input" placeholder="请输入密码">
 						<div class="pwd_errors">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox" name="remberaccount">
+							<input type="checkbox" name="remberaccount" id="remberaccount">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>
